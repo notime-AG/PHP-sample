@@ -2,25 +2,25 @@
 // This sample uses the Apache HTTP client from HTTP Components (http://hc.apache.org/httpcomponents-client-ga/)
 require_once 'HTTP/Request2.php';
 
-$request = new Http_Request2('https://v1.notimeapi.com/api/shipment/{shipmentGuid}/status?languageid={languageId}');
+$request = new Http_Request2('https://v1.notimeapi.com/api/shipment/update');
 $url = $request->getUrl();
+
 $subscriptionKey = 'your_subscription_key';
-$shipmentGuid = 'your_shipment_guid';
 
 $headers = array(
-    // Request headers
+    'Content-Type' => 'application/json',
     'Ocp-Apim-Subscription-Key' => $subscriptionKey,
 );
 
+$body = '{ 
+"ShipmentGuid" : "534efae5-8425-4b4b-85f4-c162470d8952",
+"Action": "6",
+"Param": "New pickup note for shipment"
+}';
+
 $request->setHeader($headers);
-
-$parameters = array(
-    'shipmentGuid' => $shipmentGuid,
-    'languageId' => '1'
-);
-
-$url->setQueryVariables($parameters);
-$request->setMethod(HTTP_Request2::METHOD_GET);
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setBody($body);
 
 try
 {

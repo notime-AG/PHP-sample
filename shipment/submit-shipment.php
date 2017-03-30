@@ -53,6 +53,12 @@ $body = '{
 "ImageUrl": "http://test.com/image.png",
 "Type": 100,
 "Labels": ["Test"]
+}],
+"Parcels":
+[{
+"ParcelNumber":"01",
+"Size":"S",
+"Weight": 0.5
 }]
 }';
 
